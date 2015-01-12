@@ -27,8 +27,10 @@ class Tags extends CI_Controller{
    }
     public function delete_from_geopoints(){
         $data['ids'] = $this->tags_model->take_id_of_repeated_names();
-        $data['sh']=$this->tags_model->delete_from_geo($data['ids']);
+        $permition=$this->tags_model->delete_from_geo($data['ids']);
+        if($permition===true){
+            $this->tags_model->delete_ids_from_tags($data['ids']);
+        }
         $this->load->view('top',$data);
-
-    }
+        }
 }

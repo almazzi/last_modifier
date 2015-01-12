@@ -40,7 +40,7 @@
 
 $route['default_controller'] = 'tags';
 $route['404_override'] = '';
-$route['tags/repair_names']='tags/repair_names';
+$route['tags/repair_names']='tags/repaire_names';
 $route['tags/ids']='tags/get_id_of_repeated_names';
 $route['tags/top']='tags/delete_from_geopoints';
 

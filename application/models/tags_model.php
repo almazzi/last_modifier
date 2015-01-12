@@ -18,7 +18,7 @@ function repair_name($cname){
 
     return $cname;}
 class tags_model extends CI_Model{
-    var $ids_of_repeated = array();
+    public $accesstoTags = false;
     public  function __construct(){
         parent::__construct();
         $this->load->database();
@@ -61,8 +61,7 @@ class tags_model extends CI_Model{
         }return $ids;
     }
     public function delete_from_geo($ids){
-        $data = array();
-        $temp = array();
+
         foreach($ids as $item){
 
            $this->db->select('geopoints_id,tags_id');
@@ -80,10 +79,18 @@ class tags_model extends CI_Model{
                 $this->db->where('tags_id',$item[$i]['id']);
                 $this->db->update('geo_points_tags');
             }
+         }
+        $accesstoTags = true;
+        return $accesstoTags;
 
-
-
-    }
-    }
+   }
+   public function delete_ids_from_tags($ids){
+   foreach($ids as $item){
+       for($i=1;$i<count($item);$i++){
+           $this->db->where('id',$item[$i]['id']);
+           $this->db->delete('tags');
+       }
+   }
+   }
 
 }
